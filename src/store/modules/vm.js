@@ -112,3 +112,40 @@
 //     }
 //   }
 // }
+export default {
+  state: {
+    vms: [
+      {
+        id: '1',
+        name: 'vm1',
+        task: 'web-4550',
+        user: 'Артур',
+        date: '08.11.2020'
+      },
+      {
+        id: '2',
+        name: 'vm2',
+        task: 'apk-760',
+        user: 'Никита',
+        date: '08.11.2020'
+      },
+      {
+        id: '3',
+        name: 'vm3',
+        task: 'mob-721',
+        user: 'Мишаня',
+        date: '08.11.2020'
+      }
+    ]
+  },
+  mutations: {},
+  actions: {},
+  getters: {
+    vms (state) {
+      return state.vms
+    },
+    myVms (state) {
+      return state.vms
+    }
+  }
+}
