@@ -60,9 +60,9 @@ export default {
     createProduct () {
       if (this.$refs.form.validate()) {
         const vm = {
-          name: this.name
-          task: this.task
-          owner: this.owner
+          name: this.name,
+          task: this.task,
+          owner: this.owner,
           date: this.date
         }
         this.$store.dispatch('createVm', vm)
