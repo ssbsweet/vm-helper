@@ -11,7 +11,7 @@
                         <tr>
                           <td>{{ vm.name }}</td>
                           <td>{{ vm.task }}</td>
-                          <td>{{ vm.worker }}</td>
+                          <td>{{ vm.owner }}</td>
                           <td>{{ vm.date }}</td>
                             <v-spacer></v-spacer>
                             <v-btn dark color="light-blue darken-4">b1</v-btn>
