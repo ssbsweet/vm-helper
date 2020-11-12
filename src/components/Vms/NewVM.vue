@@ -59,13 +59,13 @@ export default {
   methods: {
     createProduct () {
       if (this.$refs.form.validate()) {
-        const newVm = {
+        const vm = {
           name: this.name,
           task: this.task,
           owner: this.owner,
           date: this.date
         }
-        this.$store.dispatch('createVm', newVm)
+        this.$store.dispatch('createVm', vm)
       }
     }
   }
