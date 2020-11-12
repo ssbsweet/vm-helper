@@ -115,13 +115,12 @@
 import * as fb from 'firebase'
 
 class Vm {
-  constructor (name, task, worker, ownerId, date, id = null) {
+  constructor (name, task, owner, date, id = null) {
     this.name = name
     this.task = task
-    this.worker = worker
+    this.owner = owner
     this.date = date
     this.id = id
-    this.ownerId = ownerId
   }
 }
 
@@ -132,21 +131,21 @@ export default {
         id: '1',
         name: 'vm1',
         task: 'web-4550',
-        worker: 'Артур',
+        owner: 'Артур',
         date: '08.11.2020'
       },
       {
         id: '2',
         name: 'vm2',
         task: 'apk-760',
-        worker: 'Никита',
+        owner: 'Никита',
         date: '08.11.2020'
       },
       {
         id: '3',
         name: 'vm3',
         task: 'mob-721',
-        worker: 'Мишаня',
+        owner: 'Мишаня',
         date: '08.11.2020'
       }
     ]
@@ -161,7 +160,7 @@ export default {
       commit('clearError')
       commit('setLoading', true)
       try {
-        const newVm = new Vm(payload.name, payload.task, payload.worker, payload.date, payload.ownerId, fb.auth().currentUser.uid)
+        const newVm = new Vm(payload.name, payload.task, payload.owner, payload.date, fb.auth().currentUser.uid)
         const vm = await fb.database().ref('vms').push(newVm)
         console.log(vm)
       } catch (error) {
