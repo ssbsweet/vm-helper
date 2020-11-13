@@ -152,7 +152,7 @@ export default {
   },
   mutations: {
     createVm (state, payload) {
-      state.vm.push(payload)
+      state.vms.push(payload)
     }
   },
   actions: {
@@ -160,9 +160,20 @@ export default {
       commit('clearError')
       commit('setLoading', true)
       try {
-        const newVm = new Vm(payload.name, payload.task, payload.owner, payload.date, fb.auth().currentUser.uid)
+        const newVm = new Vm(
+          payload.name,
+          payload.task,
+          payload.owner,
+          payload.date,
+          payload.id
+        )
         const vm = await fb.database().ref('vms').push(newVm)
-        console.log(vm)
+        // console.log(vm)
+        commit('setLoading', false)
+        commit('createVm', {
+          ...newVm,
+          id: vm.key
+        })
       } catch (error) {
         commit('setError', error.message)
         commit('setLoading', false)
