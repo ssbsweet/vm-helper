@@ -75,7 +75,7 @@ export default {
           .then(() => {
             this.$router.push('/myvms')
           })
-          // .catch(() => {})
+          .catch(() => {})
       }
     }
   }
