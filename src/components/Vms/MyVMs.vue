@@ -14,7 +14,7 @@
                           <td>{{ vm.owner }}</td>
                           <td>{{ vm.date }}</td>
                             <v-spacer></v-spacer>
-                            <v-btn dark color="light-blue darken-4">b1</v-btn>
+                            <edit-vm></edit-vm>
                             <v-btn dark color="light-blue darken-4">b2</v-btn>
                         </tr>
                       </tbody>
@@ -27,11 +27,16 @@
 </template>
 
 <script>
+import EditVm from './EditVm.vue'
+
 export default {
   computed: {
     vms () {
       return this.$store.getters.vms
     }
+  },
+  components: {
+    EditVm
   }
 }
 </script>

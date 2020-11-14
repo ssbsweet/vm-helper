@@ -13,23 +13,26 @@
                   :rules="[v => !!v  || 'Name is required']"
                   v-model="name"></v-text-field>
                   <v-text-field
-                  prepend-icon="anchor"
-                  name="task"
-                  label="task number"
-                  type="text"
-                  v-model="task"></v-text-field>
+                    prepend-icon="anchor"
+                    name="task"
+                    label="task number"
+                    type="text"
+                    v-model="task">
+                  </v-text-field>
                   <v-text-field
-                  prepend-icon="person"
-                  name="owner"
-                  label="who use"
-                  type="text"
-                  v-model="owner"></v-text-field>
+                    prepend-icon="person"
+                    name="owner"
+                    label="who use"
+                    type="text"
+                    v-model="owner">
+                  </v-text-field>
                   <v-text-field
-                  prepend-icon="alarm"
-                  name="actual"
-                  label="actualization date"
-                  type="date"
-                  v-model="date"></v-text-field>
+                    prepend-icon="alarm"
+                    name="actual"
+                    label="actualization date"
+                    type="date"
+                    v-model="date">
+                  </v-text-field>
                   <v-layout>
                     <v-flex xs12>
                       <v-spacer></v-spacer>
