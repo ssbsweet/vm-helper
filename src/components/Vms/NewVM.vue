@@ -28,7 +28,7 @@
                   prepend-icon="alarm"
                   name="actual"
                   label="actualization date"
-                  type="text"
+                  type="date"
                   v-model="date"></v-text-field>
                   <v-layout>
                     <v-flex xs12>

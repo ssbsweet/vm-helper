@@ -1,7 +1,7 @@
 import * as fb from 'firebase'
 
 class Vm {
-  constructor (name, task, owner, ownerId, date, id = null) {
+  constructor (name, task, owner, date, ownerId, id = null) {
     this.name = name
     this.task = task
     this.owner = owner
@@ -55,6 +55,7 @@ export default {
           payload.task,
           payload.owner,
           payload.date,
+          '',
           getters.user.id
         )
         const vm = await fb.database().ref('vms').push(newVm)
@@ -76,9 +77,9 @@ export default {
       const resultVms = []
       try {
         const vmsVal = await fb.database().ref('vms').once('value')
-        const products = vmsVal.val()
-        Object.keys(products).forEach(key => {
-          const vm = products[key]
+        const vms = vmsVal.val()
+        Object.keys(vms).forEach(key => {
+          const vm = vms[key]
           resultVms.push(
             new Vm(
               vm.name,
@@ -93,7 +94,7 @@ export default {
         })
       } catch (error) {
         commit('setError', error.message)
-        commit('setLoading', true)
+        commit('setLoading', false)
         throw error
       }
     }
