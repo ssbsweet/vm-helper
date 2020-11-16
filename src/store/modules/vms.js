@@ -63,6 +63,8 @@ export default {
       commit('setLoading', true)
       const resultVms = []
       try {
+        // const test = await fb.database().ref('vms')
+        // test.on('value', snap => console.log(snap.val()))
         const vmsVal = await fb.database().ref('vms').once('value')
         const vms = vmsVal.val()
         Object.keys(vms).forEach(key => {
