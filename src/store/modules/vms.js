@@ -1,41 +1,19 @@
 import * as fb from 'firebase'
 
 class Vm {
-  constructor (name, task, owner, date, ownerId, id = null) {
+  constructor (name, task, owner, date, /* ownerId, */ id = null) {
     this.name = name
     this.task = task
     this.owner = owner
     this.date = date
-    this.ownerId = ownerId
+    // this.ownerId = ownerId
     this.id = id
   }
 }
 
 export default {
   state: {
-    vms: [
-      // {
-      //   id: '1',
-      //   name: 'vm1',
-      //   task: 'web-4550',
-      //   owner: 'Артур',
-      //   date: '08.11.2020'
-      // },
-      // {
-      //   id: '2',
-      //   name: 'vm2',
-      //   task: 'apk-760',
-      //   owner: 'Никита',
-      //   date: '08.11.2020'
-      // },
-      // {
-      //   id: '3',
-      //   name: 'vm3',
-      //   task: 'mob-721',
-      //   owner: 'Мишаня',
-      //   date: '08.11.2020'
-      // }
-    ]
+    vms: []
   },
   mutations: {
     createVm (state, payload) {
@@ -43,6 +21,15 @@ export default {
     },
     loadVms (state, payload) {
       state.vms = payload
+    },
+    updateVm (state, { name, task, owner, date, id }) {
+      const vm = state.vms.find(x => {
+        return x.id === id
+      })
+      vm.name = name
+      vm.task = task
+      vm.owner = owner
+      vm.date = date
     }
   },
   actions: {
@@ -55,7 +42,7 @@ export default {
           payload.task,
           payload.owner,
           payload.date,
-          '',
+          // '',
           getters.user.id
         )
         const vm = await fb.database().ref('vms').push(newVm)
@@ -85,13 +72,37 @@ export default {
               vm.name,
               vm.task,
               vm.owner,
-              vm.date,
-              vm.ownerId
+              vm.date/*,
+              vm.ownerId */
             )
           )
           commit('loadVms', resultVms)
           commit('setLoading', false)
         })
+      } catch (error) {
+        commit('setError', error.message)
+        commit('setLoading', false)
+        throw error
+      }
+    },
+    async updateVm ({ commit }, { name, task, owner, date, id }) {
+      commit('clearError')
+      commit('setLoading', true)
+      try {
+        await fb.database().ref('vms').child(id).update({
+          name,
+          task,
+          owner,
+          date
+        })
+        commit('updateVm', {
+          name,
+          task,
+          owner,
+          date,
+          id
+        })
+        commit('setLoading', false)
       } catch (error) {
         commit('setError', error.message)
         commit('setLoading', false)

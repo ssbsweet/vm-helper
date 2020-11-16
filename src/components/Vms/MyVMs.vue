@@ -14,7 +14,7 @@
                           <td>{{ vm.owner }}</td>
                           <td>{{ vm.date }}</td>
                             <v-spacer></v-spacer>
-                            <edit-vm></edit-vm>
+                            <edit-vm :vm="vm"></edit-vm>
                             <v-btn dark color="light-blue darken-4">b2</v-btn>
                         </tr>
                       </tbody>

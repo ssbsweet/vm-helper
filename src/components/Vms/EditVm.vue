@@ -52,8 +52,8 @@
           <v-flex xs12>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn dark color="light-blue darken-4" outlined>Cancel</v-btn>
-              <v-btn dark color="light-blue darken-4">Save</v-btn>
+              <v-btn dark color="light-blue darken-4" outlined @click="onCancel">Cancel</v-btn>
+              <v-btn dark color="light-blue darken-4" @click="onSave">Save</v-btn>
             </v-card-actions>
           </v-flex>
         </v-layout>
@@ -64,9 +64,35 @@
 
 <script>
 export default {
+  props: ['vm'],
   data () {
     return {
-      dialog: false
+      dialog: false,
+      editedName: this.vm.name,
+      editedTask: this.vm.task,
+      editedOwner: this.vm.owner,
+      editedDate: this.vm.date
+    }
+  },
+  methods: {
+    onCancel () {
+      this.editedName = this.vm.name
+      this.editedTask = this.vm.task
+      this.editedOwner = this.vm.owner
+      this.editedDate = this.vm.date
+      this.dialog = false
+    },
+    onSave () {
+      if (this.editedName !== '' && this.editedTask !== '' && this.editedOwner !== '' && this.editedDate !== '') {
+        this.$store.dispatch('updateVm', {
+          name: this.editedName,
+          task: this.editedTask,
+          owner: this.editedOwner,
+          date: this.editedDate,
+          id: this.vm.id
+        })
+        this.dialog = false
+      }
     }
   }
 }
