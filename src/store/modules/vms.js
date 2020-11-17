@@ -1,12 +1,12 @@
 import * as fb from 'firebase'
 
 class Vm {
-  constructor (name, task, owner, date, /* ownerId, */ id = null) {
+  constructor (name, task, owner, date, ownerId, id = null) {
     this.name = name
     this.task = task
     this.owner = owner
     this.date = date
-    // this.ownerId = ownerId
+    this.ownerId = ownerId
     this.id = id
   }
 }
@@ -30,6 +30,9 @@ export default {
       vm.task = task
       vm.owner = owner
       vm.date = date
+    },
+    deleteVm (state, payload) {
+      state.vms = payload
     }
   },
   actions: {
@@ -42,7 +45,6 @@ export default {
           payload.task,
           payload.owner,
           payload.date,
-          // '',
           getters.user.id
         )
         const vm = await fb.database().ref('vms').push(newVm)
@@ -74,8 +76,7 @@ export default {
               vm.name,
               vm.task,
               vm.owner,
-              vm.date/*,
-              vm.ownerId */
+              vm.date
             )
           )
           commit('loadVms', resultVms)
@@ -110,17 +111,36 @@ export default {
         commit('setLoading', false)
         throw error
       }
+    },
+    async deleteVm ({ commit }) {
+      commit('clearError')
+      commit('setLoading', true)
+      try {
+        // await fb.database().ref('vms').child(key).remove()
+        const deedRef = await fb.database().ref('vms')
+        deedRef.limitToLast(1).once('value', (snapshot) => {
+          snapshot.forEach((deedSnapshot) => {
+            deedSnapshot.ref.remove()
+          })
+        })
+        commit('deleteVm')
+        commit('setLoading', false)
+      } catch (error) {
+        commit('setError', error.message)
+        commit('setLoading', false)
+        throw error
+      }
     }
   },
   getters: {
     vms (state) {
       return state.vms
     },
-    myVms (state) {
-      return state.vms
-      // return state.vms.filter(vm => {
-      //   return vm.ownerId === getters.user.id
-      // })
+    myVms (state, getters) {
+      // return state.vms
+      return state.vms.filter(vm => {
+        return vm.ownerId === getters.user.id
+      })
     }
   }
 }
