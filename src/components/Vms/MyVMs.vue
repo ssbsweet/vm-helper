@@ -14,7 +14,7 @@
                         <td>{{ vm.owner }}</td>
                         <td>{{ vm.date }}</td>
                           <v-spacer></v-spacer>
-                          <edit-vm :vm="vm"></edit-vm>
+                          <edit-vm :vm="vm" v-if="isOwner"></edit-vm>
                           <v-btn dark color="light-blue darken-4" @click="onDelete">Delete</v-btn>
                       </tr>
                     </tbody>
@@ -30,6 +30,7 @@
 import EditVm from './EditVm.vue'
 
 export default {
+  props: ['id'],
   computed: {
     vms () {
       return this.$store.getters.vms
@@ -42,6 +43,9 @@ export default {
     onDelete () {
       this.$store.dispatch('deleteVm')
       window.location.reload()
+    },
+    isOwner () {
+      return this.product.ownerId === this.$store.getters.user.id
     }
   }
 }

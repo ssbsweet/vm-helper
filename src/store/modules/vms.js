@@ -1,12 +1,12 @@
 import * as fb from 'firebase'
 
 class Vm {
-  constructor (name, task, owner, date, /* ownerId, */ id = null) {
+  constructor (name, task, owner, date, ownerId, id = null) {
     this.name = name
     this.task = task
     this.owner = owner
     this.date = date
-    // this.ownerId = ownerId
+    this.ownerId = ownerId
     this.id = id
   }
 }
@@ -45,7 +45,6 @@ export default {
           payload.task,
           payload.owner,
           payload.date,
-          // '',
           getters.user.id
         )
         const vm = await fb.database().ref('vms').push(newVm)
@@ -77,8 +76,9 @@ export default {
               vm.name,
               vm.task,
               vm.owner,
-              vm.date/*,
-              vm.ownerId */
+              vm.date,
+              vm.ownerId,
+              key
             )
           )
           commit('loadVms', resultVms)
@@ -138,11 +138,11 @@ export default {
     vms (state) {
       return state.vms
     },
-    myVms (state) {
-      return state.vms
-      // return state.vms.filter(vm => {
-      //   return vm.ownerId === getters.user.id
-      // })
+    myVms (state, getters) {
+      // return state.vms
+      return state.vms.filter(vm => {
+        return vm.ownerId === getters.user.id
+      })
     }
   }
 }

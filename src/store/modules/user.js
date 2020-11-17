@@ -1,4 +1,4 @@
-import * as fb from 'firebase'
+import fb from 'firebase'
 
 class User {
   constructor (id) {
@@ -55,7 +55,7 @@ export default {
       return state.user
     },
     isUserLoggedIn (state) {
-      return state.user != null
+      return state.user !== null
     }
   }
 }
