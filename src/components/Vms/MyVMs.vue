@@ -45,7 +45,7 @@ export default {
       window.location.reload()
     },
     isOwner () {
-      return this.vm.ownerId === this.$store.getters.user.id
+      return this.product.ownerId === this.$store.getters.user.id
     }
   }
 }
