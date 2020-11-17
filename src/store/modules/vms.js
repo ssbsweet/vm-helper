@@ -30,6 +30,9 @@ export default {
       vm.task = task
       vm.owner = owner
       vm.date = date
+    },
+    deleteVm (state, payload) {
+      state.vms = payload
     }
   },
   actions: {
@@ -105,6 +108,24 @@ export default {
           date,
           id
         })
+        commit('setLoading', false)
+      } catch (error) {
+        commit('setError', error.message)
+        commit('setLoading', false)
+        throw error
+      }
+    },
+    async deleteVm ({ commit }) {
+      commit('clearError')
+      commit('setLoading', true)
+      try {
+        const deedRef = await fb.database().ref('vms')
+        deedRef.limitToLast(1).once('value', (snapshot) => {
+          snapshot.forEach((deedSnapshot) => {
+            deedSnapshot.ref.remove()
+          })
+        })
+        commit('deleteVm')
         commit('setLoading', false)
       } catch (error) {
         commit('setError', error.message)

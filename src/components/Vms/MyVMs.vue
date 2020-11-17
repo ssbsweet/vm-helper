@@ -15,7 +15,7 @@
                           <td>{{ vm.date }}</td>
                             <v-spacer></v-spacer>
                             <edit-vm :vm="vm"></edit-vm>
-                            <v-btn dark color="light-blue darken-4">b2</v-btn>
+                            <delete-vm :vm="vm"></delete-vm>
                         </tr>
                       </tbody>
                     </template>
@@ -28,6 +28,7 @@
 
 <script>
 import EditVm from './EditVm.vue'
+import DeleteVm from './DeleteVm.vue'
 
 export default {
   computed: {
@@ -36,7 +37,8 @@ export default {
     }
   },
   components: {
-    EditVm
+    EditVm,
+    DeleteVm
   }
 }
 </script>
