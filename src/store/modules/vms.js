@@ -1,12 +1,12 @@
 import * as fb from 'firebase'
 
 class Vm {
-  constructor (name, task, owner, date, /* ownerId, */ id = null) {
+  constructor (name, task, owner, date, ownerId, id = null) {
     this.name = name
     this.task = task
     this.owner = owner
     this.date = date
-    // this.ownerId = ownerId
+    this.ownerId = ownerId
     this.id = id
   }
 }
@@ -42,8 +42,8 @@ export default {
           payload.task,
           payload.owner,
           payload.date,
-          // '',
-          getters.user.id
+          getters.user.id,
+          ''
         )
         const vm = await fb.database().ref('vms').push(newVm)
         // console.log(vm)
@@ -74,8 +74,9 @@ export default {
               vm.name,
               vm.task,
               vm.owner,
-              vm.date/*,
-              vm.ownerId */
+              vm.date,
+              vm.ownerId,
+              key
             )
           )
           commit('loadVms', resultVms)

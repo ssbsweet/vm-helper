@@ -1,9 +1,7 @@
 <template>
   <v-dialog width="400" v-model="dialog">
     <template v-slot:activator="{ on, attrs }">
-      <v-btn color="red lighten-2" dark v-bind="attrs" v-on="on">
-        Click Me
-      </v-btn>
+      <v-btn color="red lighten-2" dark v-bind="attrs" v-on="on">EDIT</v-btn>
     </template>
     <v-card>
       <v-container>
