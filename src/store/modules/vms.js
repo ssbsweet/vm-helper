@@ -139,11 +139,11 @@ export default {
     vms (state) {
       return state.vms
     },
-    myVms (state) {
-      return state.vms
-      // return state.vms.filter(vm => {
-      //   return vm.ownerId === getters.user.id
-      // })
+    myVms (state, getters) {
+      // return state.vms
+      return state.vms.filter(vm => {
+        return vm.ownerId === getters.user.id
+      })
     }
   }
 }

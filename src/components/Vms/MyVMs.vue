@@ -33,7 +33,7 @@ import DeleteVm from './DeleteVm.vue'
 export default {
   computed: {
     vms () {
-      return this.$store.getters.vms
+      return this.$store.getters.myVms
     }
   },
   components: {
