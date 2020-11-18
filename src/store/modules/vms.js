@@ -32,7 +32,8 @@ export default {
       vm.date = date
     },
     deleteVm (state, payload) {
-      state.vms = payload
+      var index = state.vms.findIndex(vm => vm.id === payload)
+      state.vms.splice(index, 1)
     }
   },
   actions: {

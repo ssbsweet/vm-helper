@@ -40,6 +40,7 @@ export default {
     onDelete () {
       this.$store.dispatch('deleteVm')
       this.dialog = false
+      // this.$store.dispatch('fetchVms')
       // window.location.reload()
     }
   }
