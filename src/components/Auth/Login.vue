@@ -69,6 +69,8 @@ export default {
         this.$store.dispatch('loginUser', user)
           .then(() => {
             this.$router.push('/myvms')
+            location.reload()
+            return false
           })
           .catch(() => {})
       }
