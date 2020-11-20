@@ -72,8 +72,8 @@ export default {
         const vmsVal = await fb.database().ref('vms')
         vmsVal.on('value', snap => {
           const vms = snap.val()
-          Object.keys(vms).forEach(key => {
-            const vm = vms[key]
+          Object.keys(vms).forEach(uid => {
+            const vm = vms[uid]
             resultVms.push(
               new Vm(
                 vm.name,
@@ -81,7 +81,7 @@ export default {
                 vm.owner,
                 vm.date,
                 vm.ownerId,
-                key
+                uid
               )
             )
             commit('loadVms', resultVms)
