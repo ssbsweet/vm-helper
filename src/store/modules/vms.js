@@ -69,23 +69,41 @@ export default {
       try {
         // const test = await fb.database().ref('vms')
         // test.on('value', snap => console.log(snap.val()))
-        const vmsVal = await fb.database().ref('vms').once('value')
-        const vms = vmsVal.val()
-        Object.keys(vms).forEach(key => {
-          const vm = vms[key]
-          resultVms.push(
-            new Vm(
-              vm.name,
-              vm.task,
-              vm.owner,
-              vm.date,
-              vm.ownerId,
-              key
+        const vmsVal = await fb.database().ref('vms')
+        vmsVal.on('value', snap => {
+          const vms = snap.val()
+          Object.keys(vms).forEach(key => {
+            const vm = vms[key]
+            resultVms.push(
+              new Vm(
+                vm.name,
+                vm.task,
+                vm.owner,
+                vm.date,
+                vm.ownerId,
+                key
+              )
             )
-          )
-          commit('loadVms', resultVms)
-          commit('setLoading', false)
+            commit('loadVms', resultVms)
+            commit('setLoading', false)
+          })
         })
+        // const vms = vmsVal.val()
+        // Object.keys(vms).forEach(key => {
+        //   const vm = vms[key]
+        //   resultVms.push(
+        //     new Vm(
+        //       vm.name,
+        //       vm.task,
+        //       vm.owner,
+        //       vm.date,
+        //       vm.ownerId,
+        //       key
+        //     )
+        //   )
+        //   commit('loadVms', resultVms)
+        //   commit('setLoading', false)
+        // })
       } catch (error) {
         commit('setError', error.message)
         commit('setLoading', false)
