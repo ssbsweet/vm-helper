@@ -1,23 +1,23 @@
 <template>
-    <v-app>
-      <NavBar/>
-      <template v-if="error">
-        <v-snackbar
+  <v-app>
+    <NavBar/>
+    <template v-if="error">
+      <v-snackbar
         :multi-line="true"
         :timeout="10000"
         color="error"
         @input="closeError"
         :value="true">
           {{ error }}
-          <v-btn
+        <v-btn
           color="red accent-1"
           text
           @click.native="closeError"
-          >Close
-          </v-btn>
-        </v-snackbar>
-      </template>
-    </v-app>
+        >Close
+        </v-btn>
+      </v-snackbar>
+    </template>
+  </v-app>
 </template>
 
 <script>
