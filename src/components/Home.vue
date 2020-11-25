@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-layout row color="blue">
+    <v-layout row>
       <v-flex xs12
         v-for="(vm, i) in vms"
         :key="i">
