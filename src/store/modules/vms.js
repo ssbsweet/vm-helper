@@ -68,7 +68,7 @@ export default {
       const resultVms = []
       try {
         const vmsVal = await fb.database().ref('vms')
-        vmsVal.on('value', snap => {
+        vmsVal.once('value', snap => {
           const vms = snap.val()
           Object.keys(vms).forEach(uid => {
             const vm = vms[uid]
