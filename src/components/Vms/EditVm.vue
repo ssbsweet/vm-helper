@@ -43,6 +43,7 @@
                 type="date"
                 v-model="editedDate">
               </v-text-field>
+              <v-color-picker class="ma-2" hide-canvas></v-color-picker>
             </v-card-text>
           </v-flex>
         </v-layout>
