@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app id="app">
     <NavBar/>
     <template v-if="error">
       <v-snackbar
@@ -40,3 +40,9 @@ export default {
   }
 }
 </script>
+
+<style>
+#app {
+  background-color: #263238;
+}
+</style>

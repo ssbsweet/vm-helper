@@ -1,44 +1,40 @@
 <template>
-    <v-container>
-        <v-layout row v-if="!loading && vms.length !== 0">
-            <v-flex xs12
-            v-for="(vm, i) in vms"
-            :key="i">
-                <v-banner single-line>
-                  <v-simple-table>
-                    <template v-slot:default>
-                      <tbody>
-                        <tr>
-                          <td>{{ vm.name }}</td>
-                          <td>{{ vm.task }}</td>
-                          <td>{{ vm.owner }}</td>
-                          <td>{{ vm.date }}</td>
-                            <v-spacer></v-spacer>
-                            <edit-vm :vm="vm"></edit-vm>
-                            <delete-vm :vm="vm"></delete-vm>
-                        </tr>
-                      </tbody>
-                    </template>
-                  </v-simple-table>
-                </v-banner>
-            </v-flex>
-        </v-layout>
-        <v-layout v-else-if="!loading && vms.length === 0">
-          <v-flex xs12 class="text-xs-center">
-            <h1 class="text-primary">You have no VMs</h1>
-          </v-flex>
-        </v-layout>
-        <v-layout v-else>
-          <v-flex xs12 class="text-xs-center">
-            <v-progress-circular
-              :size="100"
-              :width="4"
-              color="blue"
-              indeterminate>
-            </v-progress-circular>
-          </v-flex>
-        </v-layout>
-    </v-container>
+  <v-container>
+    <v-layout row v-if="!loading && vms.length !== 0">
+      <v-flex xs12
+        v-for="(vm, i) in vms"
+        :key="i">
+        <v-row class="light-blue--text text--lighten-5" id="vmLine">
+          <v-col cols="1">
+            <v-icon large color="green darken-2">computer</v-icon>
+            {{ vm.name }}
+          </v-col>
+          <v-col cols="2">{{ vm.task }}</v-col>
+          <v-col cols="2">{{ vm.owner }}</v-col>
+          <v-col cols="1">{{ vm.date }}</v-col>
+          <v-col cols="2">
+            <edit-vm :vm="vm"></edit-vm>
+            <delete-vm :vm="vm"></delete-vm>
+          </v-col>
+        </v-row>
+      </v-flex>
+    </v-layout>
+    <v-layout v-else-if="!loading && vms.length === 0">
+      <v-flex xs12 class="text-xs-center">
+        <h1 class="text-primary">You have no VMs</h1>
+      </v-flex>
+    </v-layout>
+    <v-layout v-else>
+      <v-flex xs12 class="text-xs-center">
+        <v-progress-circular
+          :size="100"
+          :width="4"
+          color="blue"
+          indeterminate>
+        </v-progress-circular>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -60,3 +56,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+#vmLine {
+  background-color: #37474F;
+  border-radius: 8px;
+  border: 1px solid #78909C;
+}
+</style>
