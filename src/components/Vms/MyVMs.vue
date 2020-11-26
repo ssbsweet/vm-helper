@@ -10,8 +10,9 @@
             {{ vm.name }}
           </v-col>
           <v-col cols="2">{{ vm.task }}</v-col>
-          <v-col cols="2">{{ vm.owner }}</v-col>
-          <v-col cols="1">{{ vm.date }}</v-col>
+          <v-col cols="1">{{ vm.owner }}</v-col>
+          <v-col cols="2">{{ vm.date }}</v-col>
+          <v-checkbox v-model="checkbox1" color="success"></v-checkbox>
           <v-col cols="2">
             <edit-vm :vm="vm"></edit-vm>
             <delete-vm :vm="vm"></delete-vm>
@@ -42,6 +43,11 @@ import EditVm from './EditVm.vue'
 import DeleteVm from './DeleteVm.vue'
 
 export default {
+  data () {
+    return {
+      checkbox1: true
+    }
+  },
   computed: {
     vms () {
       return this.$store.getters.myVms
