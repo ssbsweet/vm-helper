@@ -6,7 +6,7 @@
         :key="i">
         <v-row class="light-blue--text text--lighten-5" id="vmLine">
           <v-col cols="1">
-            <v-icon large color="green darken-2">mdi-desktop-classic</v-icon>
+            <v-icon large :style="{ color: vm.color }">mdi-desktop-classic</v-icon>
             {{ vm.name }}
           </v-col>
           <v-col cols="2">{{ vm.task }}</v-col>
