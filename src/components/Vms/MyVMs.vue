@@ -5,18 +5,18 @@
         v-for="(vm, i) in vms"
         :key="i">
         <v-row class="light-blue--text text--lighten-5" id="vmLine">
-            <v-col cols="2">
-              <v-icon large :style="{ color: vm.color }">mdi-desktop-classic</v-icon>
-              {{ vm.name }}
-            </v-col>
-            <v-col cols="2">{{ vm.task }}</v-col>
-            <v-col cols="2">{{ vm.owner }}</v-col>
-            <v-col cols="2">{{ vm.date }}</v-col>
-            <!-- <v-checkbox v-model="checkbox1" color="success"></v-checkbox> -->
-            <v-col cols="3">
-              <edit-vm :vm="vm"></edit-vm>
-              <delete-vm :vm="vm"></delete-vm>
-            </v-col>
+          <v-col cols="2">
+            <v-icon large :style="{ color: vm.color }">mdi-desktop-classic</v-icon>
+            {{ vm.name }}
+          </v-col>
+          <v-col cols="2">{{ vm.task }}</v-col>
+          <v-col cols="2">{{ vm.owner }}</v-col>
+          <v-col cols="2">{{ vm.date }}</v-col>
+          <!-- <v-checkbox v-model="checkbox1" color="success"></v-checkbox> -->
+          <v-col cols="3">
+            <edit-vm :vm="vm"></edit-vm>
+            <delete-vm :vm="vm"></delete-vm>
+          </v-col>
         </v-row>
       </v-flex>
     </v-layout>
