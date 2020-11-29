@@ -43,6 +43,7 @@
                 type="date"
                 v-model="editedDate">
               </v-text-field>
+              <v-color-picker class="ma-2" hide-canvas v-model="editedColor"></v-color-picker>
             </v-card-text>
           </v-flex>
         </v-layout>
@@ -69,7 +70,8 @@ export default {
       editedName: this.vm.name,
       editedTask: this.vm.task,
       editedOwner: this.vm.owner,
-      editedDate: this.vm.date
+      editedDate: this.vm.date,
+      editedColor: this.vm.color
     }
   },
   methods: {
@@ -78,15 +80,17 @@ export default {
       this.editedTask = this.vm.task
       this.editedOwner = this.vm.owner
       this.editedDate = this.vm.date
+      this.editedColor = this.vm.color
       this.dialog = false
     },
     onSave () {
-      if (this.editedName !== '' && this.editedTask !== '' && this.editedOwner !== '' && this.editedDate !== '') {
+      if (this.editedName !== '' && this.editedTask !== '' && this.editedOwner !== '' && this.editedDate !== '' && this.editedColor !== '') {
         this.$store.dispatch('updateVm', {
           name: this.editedName,
           task: this.editedTask,
           owner: this.editedOwner,
           date: this.editedDate,
+          color: this.editedColor,
           id: this.vm.id
         })
         this.dialog = false

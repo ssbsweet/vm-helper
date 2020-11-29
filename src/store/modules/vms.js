@@ -1,11 +1,12 @@
 import * as fb from 'firebase'
 
 class Vm {
-  constructor (name, task, owner, date, ownerId, id = null) {
+  constructor (name, task, owner, date, color, ownerId, id = null) {
     this.name = name
     this.task = task
     this.owner = owner
     this.date = date
+    this.color = color
     this.ownerId = ownerId
     this.id = id
   }
@@ -22,7 +23,7 @@ export default {
     loadVms (state, payload) {
       state.vms = payload
     },
-    updateVm (state, { name, task, owner, date, id }) {
+    updateVm (state, { name, task, owner, date, color, id }) {
       const vm = state.vms.find(x => {
         return x.id === id
       })
@@ -30,6 +31,7 @@ export default {
       vm.task = task
       vm.owner = owner
       vm.date = date
+      vm.coor = color
     },
     deleteVm (state, payload) {
       var index = state.vms.findIndex(vm => vm.id === payload)
@@ -46,6 +48,7 @@ export default {
           payload.task,
           payload.owner,
           payload.date,
+          payload.color,
           getters.user.id,
           ''
         )
@@ -67,24 +70,25 @@ export default {
       commit('setLoading', true)
       const resultVms = []
       try {
-        // const test = await fb.database().ref('vms')
-        // test.on('value', snap => console.log(snap.val()))
-        const vmsVal = await fb.database().ref('vms').once('value')
-        const vms = vmsVal.val()
-        Object.keys(vms).forEach(uid => {
-          const vm = vms[uid]
-          resultVms.push(
-            new Vm(
-              vm.name,
-              vm.task,
-              vm.owner,
-              vm.date,
-              vm.ownerId,
-              uid
+        const vmsVal = await fb.database().ref('vms')
+        vmsVal.once('value', snap => {
+          const vms = snap.val()
+          Object.keys(vms).forEach(uid => {
+            const vm = vms[uid]
+            resultVms.push(
+              new Vm(
+                vm.name,
+                vm.task,
+                vm.owner,
+                vm.date,
+                vm.color,
+                vm.ownerId,
+                uid
+              )
             )
-          )
-          commit('loadVms', resultVms)
-          commit('setLoading', false)
+            commit('loadVms', resultVms)
+            commit('setLoading', false)
+          })
         })
       } catch (error) {
         commit('setError', error.message)
@@ -92,7 +96,7 @@ export default {
         throw error
       }
     },
-    async updateVm ({ commit }, { name, task, owner, date, id }) {
+    async updateVm ({ commit }, { name, task, owner, date, color, id }) {
       commit('clearError')
       commit('setLoading', true)
       try {
@@ -100,13 +104,15 @@ export default {
           name,
           task,
           owner,
-          date
+          date,
+          color
         })
         commit('updateVm', {
           name,
           task,
           owner,
           date,
+          color,
           id
         })
         commit('setLoading', false)

@@ -28,22 +28,24 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar app class="light-blue lighten">
+    <v-app-bar app class="mainNavBar">
       <v-app-bar-nav-icon @click="sideNav =! sideNav"
       class="hidden-md-and-up"></v-app-bar-nav-icon>
-      <v-toolbar-title>VM HELPER</v-toolbar-title>
+      <v-toolbar-title class="titleText">
+        <h2>VM HELPER</h2>
+      </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn text
-      color="white"
-      v-for="(link, i) in links"
-      :key="i"
-      :to="link.url" class="hidden-sm-and-down">
+        color="blue lighten-5"
+        v-for="(link, i) in links"
+        :key="i"
+        :to="link.url" class="hidden-sm-and-down">
         <v-icon left>{{ link.icon }}</v-icon>
       {{ link.title }}</v-btn>
       <v-btn text
-      color="white"
-      @click="onLogout"
-      v-if="isUserLoggedIn">
+        color="blue lighten-5"
+        @click="onLogout"
+        v-if="isUserLoggedIn">
         <v-icon left>exit_to_app</v-icon>
       Logout</v-btn>
     </v-app-bar>
@@ -85,3 +87,12 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.mainNavBar {
+  background: linear-gradient(to right, #4b79a1 0%, #283e51 100%);
+}
+.titleText {
+  color: #E3F2FD;
+}
+</style>

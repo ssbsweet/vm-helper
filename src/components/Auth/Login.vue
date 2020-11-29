@@ -20,7 +20,6 @@
               name="password"
               label="Password"
               type="password"
-              :counter="8"
               :rules="passwordRules"
               v-model="password"></v-text-field>
             </v-form>
@@ -50,7 +49,7 @@ export default {
       ],
       passwordRules: [
         v => !!v || 'Password is required',
-        v => (v && v.length >= 6) || 'Password must be equel or than 8 characters'
+        v => (v && v.length >= 8) || 'Password must be equel or than 8 characters'
       ]
     }
   },
