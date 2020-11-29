@@ -12,6 +12,7 @@ new Vue({
   router,
   store,
   vuetify,
+  el: '#app',
   render: h => h(App),
   created () {
     var firebaseConfig = {
