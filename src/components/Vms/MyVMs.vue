@@ -1,7 +1,34 @@
 <template>
   <v-container>
     <v-layout row v-if="!loading && vms.length !== 0">
-      <v-flex xs8
+      <v-row>
+        <v-col md="8">
+          <v-flex
+            v-for="(vm, i) in vms"
+            :key="i">
+            <v-row class="light-blue--text text--lighten-5" id="vmLine">
+              <v-col cols="2">
+                <v-icon large :style="{ color: vm.color }">mdi-desktop-classic</v-icon>
+                {{ vm.name }}
+              </v-col>
+              <v-col cols="2">{{ vm.task }}</v-col>
+              <v-col cols="2">{{ vm.owner }}</v-col>
+              <v-col cols="2">{{ vm.date }}</v-col>
+              <v-col cols="3">
+                <edit-vm :vm="vm"></edit-vm>
+                <delete-vm :vm="vm"></delete-vm>
+              </v-col>
+            </v-row>
+          </v-flex>
+        </v-col>
+        <v-col md="4">
+          <v-img
+            lazy-src="@/content/catgirl.png"
+            src="@/content/catgirl.png"
+          ></v-img>
+        </v-col>
+      </v-row>
+      <!-- <v-flex xs8
         v-for="(vm, i) in vms"
         :key="i">
         <v-row class="light-blue--text text--lighten-5" id="vmLine">
@@ -12,13 +39,12 @@
           <v-col cols="2">{{ vm.task }}</v-col>
           <v-col cols="2">{{ vm.owner }}</v-col>
           <v-col cols="2">{{ vm.date }}</v-col>
-          <!-- <v-checkbox v-model="checkbox1" color="success"></v-checkbox> -->
           <v-col cols="3">
             <edit-vm :vm="vm"></edit-vm>
             <delete-vm :vm="vm"></delete-vm>
           </v-col>
         </v-row>
-      </v-flex>
+      </v-flex> -->
     </v-layout>
     <v-layout v-else-if="!loading && vms.length === 0">
       <v-row>
@@ -55,11 +81,6 @@ import EditVm from './EditVm.vue'
 import DeleteVm from './DeleteVm.vue'
 
 export default {
-  data () {
-    return {
-      checkbox1: true
-    }
-  },
   computed: {
     vms () {
       return this.$store.getters.myVms
