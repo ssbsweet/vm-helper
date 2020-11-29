@@ -21,19 +21,31 @@
       </v-flex>
     </v-layout>
     <v-layout v-else-if="!loading && vms.length === 0">
-      <v-flex xs12 class="text-xs-center">
-        <h1 class="text-primary">You have no VMs</h1>
-      </v-flex>
+      <v-row>
+        <v-col class="d-flex justify-center">
+          <h1 class="text-primary white--text">You have no VMs</h1>
+        </v-col>
+        <v-col>
+          <v-img
+            lazy-src="@/content/empty-screen.png"
+            max-height="146"
+            max-width="200"
+            src="@/content/empty-screen.png"
+          ></v-img>
+        </v-col>
+      </v-row>
     </v-layout>
     <v-layout v-else>
-      <v-flex xs12 class="text-xs-center">
-        <v-progress-circular
-          :size="100"
-          :width="4"
-          color="blue"
-          indeterminate>
-        </v-progress-circular>
-      </v-flex>
+      <v-row>
+        <v-col class="d-flex justify-center">
+          <v-progress-circular
+            :size="100"
+            :width="4"
+            color="blue"
+            indeterminate>
+          </v-progress-circular>
+        </v-col>
+      </v-row>
     </v-layout>
   </v-container>
 </template>
